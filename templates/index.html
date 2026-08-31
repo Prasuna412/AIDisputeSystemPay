@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MidPay AI Dispute Resolution System</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #e5f0ff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .header {
+        width: 100%;
+        background-color: #000;
+        display: flex;
+        flex-direction: row; /* Changed from column to row */
+        align-items: center;
+        justify-content: space-between; /* Adjust alignment */
+        padding: 10px 20px; /* Adjusted padding */
+      }
+      .logo {
+        height: 40px;
+        margin-bottom: 20px; /* added margin for spacing */
+      }
+      .header-title {
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 600px;
+        text-align: center;
+        border: 1px solid #007bff;
+      }
+      .feature-button,
+      .logout-button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 10px;
+        transition: background-color 0.3s;
+      }
+      .feature-button:hover,
+      .logout-button:hover {
+        background-color: #0056b3;
+      }
+      .features {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      form {
+        margin: 0;
+      }
+      footer {
+        margin-top: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-title">MidPay AI Dispute Resolution System</div>
+      <form action="/logout" method="post">
+        <button type="submit" class="logout-button">Logout</button>
+      </form>
+    </div>
+    <div class="container">
+      <img
+        src="{{ url_for('static', filename='midpay_logo.webp') }}"
+        alt="MidPay Logo"
+        class="logo"
+      />
+      <h1>Select a Feature</h1>
+      <div class="features">
+        <form action="/prediction" method="get">
+          <button type="submit" class="feature-button">
+            1. Severity Prediction
+          </button>
+        </form>
+        <button class="feature-button disabled" disabled>
+          2. Dispute Category (Coming Soon)
+        </button>
+        <button class="feature-button disabled" disabled>
+          3. Predict Win (Coming Soon)
+        </button>
+        <button class="feature-button disabled" disabled>
+          4. Sentiment Analysis (Coming Soon)
+        </button>
+      </div>
+    </div>
+    <footer>
+      <p>&copy; 2024 MidPay.ai</p>
+    </footer>
+  </body>
+</html>

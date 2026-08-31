@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Predict Severity of the Dispute</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #e5f0ff;
+      }
+      .header {
+        width: 100%;
+        background-color: #000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 0;
+      }
+      .logo {
+        height: 40px;
+        margin-bottom: 20px; /* added margin for spacing */
+      }
+      .header-title {
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 10px 0 0 0;
+      }
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 600px;
+        text-align: center;
+        border: 1px solid #007bff;
+        margin-top: 20px;
+      }
+      h1 {
+        color: #007bff;
+        margin-top: 0;
+      }
+      form {
+        margin-bottom: 20px;
+      }
+      textarea {
+        width: calc(100% - 20px);
+        height: 100px;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        font-size: 16px;
+        resize: vertical;
+      }
+      button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .result {
+        margin-top: 20px;
+      }
+      .result h2 {
+        color: #007bff;
+      }
+      .result ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .result li {
+        background-color: #e9ecef;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 4px;
+      }
+      footer {
+        margin-top: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-title">Predict Severity of the Dispute</div>
+    </header>
+    <div class="container">
+      <img
+        src="{{ url_for('static', filename='midpay_logo.webp') }}"
+        alt="MidPay Logo"
+        class="logo"
+      />
+      <h1>Enter Text for Prediction</h1>
+      <form action="{{ url_for('predict_severity_result') }}" method="post">
+        <div class="form-group">
+          <label for="inputData">Data Input:</label>
+          <textarea
+            class="form-control"
+            id="inputData"
+            name="text"
+            placeholder="Enter your data here"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Predict</button>
+      </form>
+      <div class="result mt-4">
+        {% if prediction is not none %}
+        <h2>
+          Prediction: {% if prediction == 2 %} High Severity {% elif prediction
+          == 1 %} Medium Severity {% elif prediction == 0 %} Low Severity {%
+          else %} Unknown {% endif %}
+        </h2>
+        {% endif %} {% if prob_high is not none and prob_medium is not none and
+        prob_low is not none %}
+        <p>Probabilities:</p>
+        <ul>
+          <li>High Severity: {{ "%.2f" % (prob_high * 100) }}%</li>
+          <li>Medium Severity: {{ "%.2f" % (prob_medium * 100) }}%</li>
+          <li>Low Severity: {{ "%.2f" % (prob_low * 100) }}%</li>
+        </ul>
+        {% endif %} {% if error %}
+        <p>Error: {{ error }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div>
+      <a href="{{ url_for('home') }}" class="link-button">Home</a>
+      <a href="{{ url_for('admin_login') }}" class="link-button">Logout</a>
+    </div>
+    <footer>
+      <p>&copy; 2024 MidPay.ai</p>
+    </footer>
+  </body>
+</html>

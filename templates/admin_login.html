@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Login - MidPay AI Dispute Resolution System</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #e5f0ff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .login-container {
+        background-color: #fff;
+        padding: 20px; /* Adjust container padding */
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 300px; /* Control the maximum width */
+        text-align: center;
+        border: 1px solid #007bff;
+        margin: auto; /* Center the container */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center-align children */
+      }
+
+      .input-field {
+        width: calc(100% - 40px); /* Subtract total horizontal padding */
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        box-sizing: border-box; /* Include padding and border in width */
+      }
+
+      .login-button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        width: calc(100% - 40px); /* Match the input fields width */
+        margin-top: 20px;
+        transition: background-color 0.3s;
+      }
+
+      .login-button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Admin Login</h2>
+      <form action="{{ url_for('admin_login') }}" method="post">
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          class="input-field"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          class="input-field"
+          required
+        />
+        <button type="submit" class="login-button">Log In</button>
+      </form>
+    </div>
+  </body>
+</html>
